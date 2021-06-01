@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace ParkingApp_BackEnd.Controllers
 {
+    public class WeatherForecast
+    {
+        public DateTime Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string Summary { get; set; }
+    }
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
