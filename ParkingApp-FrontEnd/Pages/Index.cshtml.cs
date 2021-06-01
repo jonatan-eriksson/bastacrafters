@@ -21,5 +21,9 @@ namespace ParkingApp_FrontEnd.Pages
         {
 
         }
+        public void OnPost()
+        {
+
+        }
     }
 }
