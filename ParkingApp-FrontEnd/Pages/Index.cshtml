@@ -12,14 +12,17 @@
         min-width: 100%;
         position: relative;
     }
+    .btn-map {
+        position: relative;
+        top: -100px;
+        z-index: 800;
+    }
 </style>
 
 <div class="text-center">
-
     <div id="map"></div>
-
-    <button type="button" class="btn btn-primary btn-lg">Parkera</button>
-    <button type="button" class="btn btn-danger btn-lg">Lämna</button>
+    <button type="button" class="btn btn-primary btn-lg btn-map">Parkera</button>
+    <button type="button" class="btn btn-danger btn-lg btn-map">Lämna</button>
 </div>
 
 <script>
@@ -33,17 +36,11 @@
     let userMarker = L.marker([0, 0], { draggable: true });
     //
     function onLocationFound(e) {
-        let radius = e.accuracy;
-
-        // userMarker = L.marker(e.latlng, { draggable: true })
         userMarker
             .setLatLng(e.latlng)
             .addTo(map)
             .bindPopup(`You are here<br>${e.latlng.lat}, ${e.latlng.lng}`)
-            // .bindPopup('You are within ' + radius + ' meters from this point')
             .openPopup();
-
-        // L.circle(e.latlng, radius).addTo(map);
     }
 
     function onLocationError(e) {
@@ -51,13 +48,9 @@
     }
 
     function onClick(e) {
-        // const content = `You are here<br>${e.latlng.lat}, ${e.latlng.lng}`;
-        // const popup = userMarker.getPopup();
-        // popup.setContent(content);
         userMarker.setLatLng(e.latlng);
         updatePopup(userMarker);
         userMarker.openPopup();
-        // userMarker._popup.setContent(content);
     }
 
     function onDragEnd(e) {
