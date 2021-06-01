@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ParkingApp_BackEnd.Models {
-    public class Users {
+    public class User {
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string Email { get; set; }

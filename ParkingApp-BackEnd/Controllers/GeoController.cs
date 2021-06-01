@@ -19,27 +19,27 @@ namespace v1 {
         
         
         //Vänta på DB
-        /*private readonly ParkingAppDbContext _context;
+        /*private readonly ParkingDbContext _context;
 
-        public GeoMessagesController(ParkingAppDbContext context) {
+        public GeoMessagesController(ParkingDbContext context) {
             _context = context;
         }*/
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Users>> GetUserLocation(int? id) {
+        public async Task<ActionResult<User>> GetUserLocation(int? id) {
 
-            if (id == 15) {
-                Users customuser = new Users() {
+            if (id != null) {
+                User customuser = new User() {
                     firstName = "Adam",
                     lastName = "Adamsson",
                     Email = "adam.adamsson@gmail.com",
                     Phone = 087020090,
                     creditCardDetails = 087020090,
                     licensePlate = "abc 123",
-                    coordinatesWhenParking = "56.676577669193534&12.857049661467235",
+                    coordinatesWhenParking = "56.676577669193534, 12.857049661467235",
                 };
-                return customuser;
-            } else return new Users();
+                return Ok(customuser);
+            } else return new User();
         }
     }
 }
