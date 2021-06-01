@@ -10,6 +10,7 @@ using Swashbuckle.Swagger.Annotations;
 using Prometheus;
 using BenchmarkDotNet.Reports;
 using ParkingApp_BackEnd.Models;
+using ParkingApp_BackEnd.Data;
 
 namespace v1 {
     [ApiController]
@@ -18,28 +19,31 @@ namespace v1 {
     public class GeoMessagesController : ControllerBase {
         
         
-        //Vänta på DB
-        /*private readonly ParkingDbContext _context;
-
+        private readonly ParkingDbContext _context;
         public GeoMessagesController(ParkingDbContext context) {
             _context = context;
-        }*/
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserLocation(int? id) {
 
             if (id != null) {
-                User customuser = new User() {
-                    firstName = "Adam",
-                    lastName = "Adamsson",
-                    Email = "adam.adamsson@gmail.com",
-                    Phone = 087020090,
-                    creditCardDetails = 087020090,
-                    licensePlate = "abc 123",
-                    coordinatesWhenParking = "56.676577669193534, 12.857049661467235",
-                };
-                return Ok(customuser);
+                var user = await _context.Users.FindAsync(id);
+
+                if (user != null) {
+                    return Ok(user);
+                } else return NotFound();
+
             } else return new User();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<User>> PostUserLocation(string coords) {
+            var tempuser = _context.Users.FindAsync(1);
+
+            tempuser.Result.CoordinatesWhenParking = coords;
+            _context.SaveChangesAsync();
+            return Ok(tempuser);
         }
     }
 }

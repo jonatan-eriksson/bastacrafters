@@ -16,7 +16,7 @@ namespace ParkingApp_BackEnd.Models
         public int CardDate { get; set; }
         public int CCV { get; set; }
         public string LicensePlate { get; set; }
-        public double CoordinatesWhenParking { get; set; }
+        public string CoordinatesWhenParking { get; set; }
         public DateTime DateTimeWhenParking { get; set; } = DateTime.Now;
         public int MinutesSpentFindingParking { get; set; }
         public int MinutesParked { get; set; }
