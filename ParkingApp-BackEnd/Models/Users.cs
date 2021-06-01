@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 
 namespace ParkingApp_BackEnd.Models
 {
-    public class Users
+    public class User
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public double Phone { get; set; }
-        public double creditCardDetails { get; set; }
-        public string licensePlate { get; set; }
-        public double coordinatesWhenParking { get; set; }
-        public double dateTimeWhenParking { get; set; }
-        public double timeSpentFindingParking { get; set; }
-        public double timeParked { get; set; }
+        public double CardNumber { get; set; }
+        public int CardDate { get; set; }
+        public int CCV { get; set; }
+        public string LicensePlate { get; set; }
+        public double CoordinatesWhenParking { get; set; }
+        public DateTime DateTimeWhenParking { get; set; } = DateTime.Now;
+        public int MinutesSpentFindingParking { get; set; }
+        public int MinutesParked { get; set; }
     }
 }
