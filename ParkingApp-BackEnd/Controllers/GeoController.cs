@@ -42,7 +42,7 @@ namespace v1 {
             var tempuser = _context.Users.FindAsync(1);
 
             tempuser.Result.CoordinatesWhenParking = coords;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return Ok(tempuser);
         }
     }
