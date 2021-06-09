@@ -1,3 +1,4 @@
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ParkingApp_BackEnd.Data;
+using ParkingApp_BackEnd.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +31,16 @@ namespace ParkingApp_BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+           
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ParkingApp_BackEnd", Version = "v1" });
             });
-
             services.AddDbContext<ParkingDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ParkingDbContext")));
+                 options.UseSqlServer(Configuration.GetConnectionString("ParkingDbContext")));
+
+
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +56,7 @@ namespace ParkingApp_BackEnd
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
