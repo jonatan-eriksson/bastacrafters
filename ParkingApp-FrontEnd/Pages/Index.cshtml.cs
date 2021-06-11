@@ -19,7 +19,7 @@ namespace ParkingApp_FrontEnd.Pages
         
         private readonly ILogger<IndexModel> _logger;
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:5001/api/v1";
+        private readonly string _baseUrl = "https://localhost:44383/api/v1";
 
         public IndexModel(ILogger<IndexModel> logger)
         {
