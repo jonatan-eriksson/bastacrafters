@@ -30,4 +30,8 @@
     <ProjectReference Include="..\ParkingApp-BackEnd\ParkingApp-BackEnd.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Shared\" />
+  </ItemGroup>
+
 </Project>

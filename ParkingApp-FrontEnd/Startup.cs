@@ -41,7 +41,6 @@ namespace ParkingApp_FrontEnd
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage(); //Kika på denna sen.
             }
             else
             {
