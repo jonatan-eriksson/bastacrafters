@@ -4,16 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ParkingApp_BackEnd.Data
 {
-    public class ParkingDbContext : DbContext
+    public class ParkingDbContext : IdentityDbContext<User>
     {
         public ParkingDbContext(DbContextOptions<ParkingDbContext> options)
             : base(options)
         {
         }
-            public DbSet<Models.User> Users { get; set; }
 
         public async Task SeedDb()
         {

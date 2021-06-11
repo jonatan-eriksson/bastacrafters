@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using ParkingApp_BackEnd.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ParkingApp_FrontEnd
 {
@@ -25,6 +27,10 @@ namespace ParkingApp_FrontEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddDbContext<ParkingDbContext>(options =>
+                  options.UseSqlServer(
+                      Configuration.GetConnectionString("ParkingApp_FrontEndContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

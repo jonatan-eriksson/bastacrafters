@@ -11,6 +11,7 @@ using Prometheus;
 using BenchmarkDotNet.Reports;
 using ParkingApp_BackEnd.Models;
 using ParkingApp_BackEnd.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace v1 {
     [ApiController]
@@ -42,7 +43,7 @@ namespace v1 {
             var tempuser = _context.Users.FindAsync(1);
 
             tempuser.Result.CoordinatesWhenParking = coords;
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return Ok(tempuser);
         }
     }
