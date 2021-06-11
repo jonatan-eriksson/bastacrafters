@@ -23,57 +23,92 @@
         top: -100px;
         z-index: 800;
     }
+
+    .car-icon {
+        background: transparent;
+        background-image: url(/images/car-icon.svg);
+        color: red;
+    }
 </style>
 
 <div method="post" class="text-center map-wrapper">
     <div id="map"></div>
-    <button type="button" class="btn btn-primary btn-lg btn-map">Parkera</button>
-    <button type="button" class="btn btn-danger btn-lg btn-map">Lämna</button>
+    <form asp-action="post">
+        <input type="submit" id="park" class="btn btn-primary btn-lg btn-map @(Model.Parked ? "d-none" : "")" value="Parkera" asp-page-handler="Park" />
+        <input type="submit" id="leave" class="btn btn-danger btn-lg btn-map @(Model.Parked ? "" : "d-none")" value="Lämna" asp-page-handler="Leave" />
+        <input id="coords" type="hidden" name="coords" value="0" />
+    </form>
 </div>
 
-<script>
+<script defer>
+    const coords = document.querySelector('#coords');
+
     const map = L.map('map').fitWorld();
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    let userMarker = L.marker([0, 0], { draggable: true });
+    const carIcon = L.divIcon({
+        className: 'car-icon',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -34]
+    });
+
+    map.locate({ setView: false, watch: true, maxZoom: 15 });
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    let userMarker;
+    let carMarker;
     //
+
     function onLocationFound(e) {
-        userMarker
-            .setLatLng(e.latlng)
-            .addTo(map)
-            .bindPopup(`You are here<br>${e.latlng.lat}, ${e.latlng.lng}`)
-            .openPopup();
+        if (!map.hasLayer(userMarker)) {
+            userMarker = L.marker(e.latlng, { draggable: true })
+            @*.bindPopup(`You are here<br>${e.latlng.lat}, ${e.latlng.lng}`)*@
+                .bindPopup('You are here!');
+            // Add eventhandler to users marker
+            userMarker.on('dragstart', onDragStart);
+            userMarker.on('dragend', onDragEnd);
+
+            map.addLayer(userMarker);
+
+            map.setView(e.latlng, 15);
+            userMarker.openPopup();
+        }
+
+        userMarker.setLatLng(e.latlng);
+            @*.openPopup();*@
+        coords.value = `${e.latlng.lat},${e.latlng.lng}`;
     }
 
     function onLocationError(e) {
         alert(e.message);
     }
 
-    function onClick(e) {
-        userMarker.setLatLng(e.latlng);
-        updatePopup(userMarker);
-        userMarker.openPopup();
+    function onDragStart(e) {
+        map.stopLocate();
     }
 
     function onDragEnd(e) {
-        updatePopup(userMarker);
+        const latlng = userMarker.getLatLng();
         userMarker.openPopup();
+        coords.value = `${latlng.lat},${latlng.lng}`;
     }
 
-    function updatePopup(marker) {
-        const latlng = marker.getLatLng();
-        const content = `You are here<br>${latlng.lat}, ${latlng.lng}`;
-        marker.getPopup().setContent(content);
-    }
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-    map.on('click', onClick);
-    userMarker.on('dragend', onDragEnd);
     //
-    map.locate({ setView: true, maxZoom: 14 });
+    let isParked = ("@Model.Parked".toLowerCase() === 'true');
+    if (isParked) {
+        let carPos = "@Model.UserModel.CoordinatesWhenParking".split(",");
+
+        let latlng = L.latLng(Number(carPos[0]), Number(carPos[1]));
+        carMarker = L.marker(latlng, { draggable: false, icon: carIcon })
+            .bindPopup('Your car is here!')
+            .openPopup();
+
+        map.addLayer(carMarker);
+    }
 </script>
