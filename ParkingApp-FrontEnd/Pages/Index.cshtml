@@ -75,7 +75,7 @@
             userMarker.on('dragend', onDragEnd);
 
             map.addLayer(userMarker);
-            
+
             map.setView(e.latlng, 15);
             userMarker.openPopup();
         }
@@ -100,7 +100,7 @@
     }
 
     //
-    const isParked = Boolean("@Model.Parked");
+    let isParked = ("@Model.Parked".toLowerCase() === 'true');
     if (isParked) {
         let carPos = "@Model.UserModel.CoordinatesWhenParking".split(",");
 

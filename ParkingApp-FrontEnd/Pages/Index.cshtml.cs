@@ -23,8 +23,8 @@ namespace ParkingApp_FrontEnd.Pages
             _httpClient = new HttpClient();
         }
 
-        public UserViewModel UserModel { get; private set; } = new UserViewModel();
-        public bool Parked { get; private set; }
+        public UserViewModel UserModel { get; set; } = new UserViewModel();
+        public bool Parked { get; set; }
 
         public async Task OnGet()
         {
