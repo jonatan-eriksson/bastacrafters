@@ -5,22 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ParkingApp_FrontEnd.Models;
 
 namespace ParkingApp_FrontEnd.Data
 {
-    public class ParkingApp_FrontEndContext : IdentityDbContext<IdentityUser>
+    public class ParkingApp_FrontEndContext : IdentityDbContext<User>
     {
         public ParkingApp_FrontEndContext(DbContextOptions<ParkingApp_FrontEndContext> options)
             : base(options)
         {
         }
        
-      protected override void OnModelCreating(ModelBuilder builder)
+        public async Task SeedDb(UserManager<User> userManager)
         {
-            base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+            await Database.EnsureDeletedAsync();
+            await Database.EnsureCreatedAsync();
+
+            User Marcus = new User()
+            {
+                FirstName = "Marcus",
+                LastName = "Backholm",
+                Email = "Marcus.Test@live.se",
+                UserName = "Marcus.Test@live.se",
+                Phone = "46739247977",
+                LicensePlate = "AWP 796",
+                CardNumber = "0000000000000000",
+                CardDate = "08 / 22",
+                CCV = "045",
+                DateTimeWhenParking = DateTime.Now,
+            };
+
+            await userManager.CreateAsync(Marcus, "Test123!");
+
+            await SaveChangesAsync();
         }
     }
 }
