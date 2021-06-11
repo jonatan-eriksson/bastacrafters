@@ -14,34 +14,33 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
+    <style>
+        .zidx {
+            z-index: 800;
+        }
+    </style>
 </head>
 <body>
     <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  bg-primary border-bottom box-shadow mb-3">
-                
-                <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li>
-                                <h2 class="display-4 ">Welcome to ParkingApp</h2>
-                                
-                            </li>
-
-                        </ul>
-                     <partial name="_LoginPartial" />
-                    </div>
-
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3 position-fixed w-100 zidx">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>
+                            <h2 class="display-4 ">Welcome to ParkingApp</h2>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
                 </div>
-            </nav>
+            </div>
+        </nav>
 
-        </header>
+    </header>
     @*<div class="container-fluid">*@
-
 
     <div>
         <main role="main">
