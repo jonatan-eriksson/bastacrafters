@@ -31,7 +31,7 @@
     }
 </style>
 
-<div class="text-center map-wrapper">
+<div method="post" class="text-center map-wrapper">
     <div id="map"></div>
     <form asp-action="post">
         <input type="submit" id="park" class="btn btn-primary btn-lg btn-map @(Model.Parked ? "d-none" : "")" value="Parkera" asp-page-handler="Park" />

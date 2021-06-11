@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ParkingApp_BackEnd.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+using ParkingApp_BackEnd.Models;
 
 namespace ParkingApp_BackEnd.Data
 {

@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ParkingApp_FrontEnd.Data;
+using ParkingApp_FrontEnd.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +27,10 @@ namespace ParkingApp_FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ParkingApp_FrontEndContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("ParkingApp_FrontEndContextConnection")));
+
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ParkingApp_FrontEndContext>();
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
         }
@@ -46,6 +54,7 @@ namespace ParkingApp_FrontEnd
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -11,8 +13,10 @@ using System.Threading.Tasks;
 
 namespace ParkingApp_FrontEnd.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
+        
         private readonly ILogger<IndexModel> _logger;
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl = "https://localhost:5001/api/v1";
@@ -79,5 +83,6 @@ namespace ParkingApp_FrontEnd.Pages
         {
             if (UserModel.CoordinatesWhenParking != null) Parked = true;
         }
+        
     }
 }
