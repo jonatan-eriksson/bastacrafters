@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ParkingApp_BackEnd.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Diagnostics;
 
 namespace ParkingApp_FrontEnd
 {
@@ -27,6 +28,7 @@ namespace ParkingApp_FrontEnd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddControllersWithViews();
 
             services.AddDbContext<ParkingDbContext>(options =>
                   options.UseSqlServer(
@@ -39,6 +41,7 @@ namespace ParkingApp_FrontEnd
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage(); //Kika på denna sen.
             }
             else
             {
