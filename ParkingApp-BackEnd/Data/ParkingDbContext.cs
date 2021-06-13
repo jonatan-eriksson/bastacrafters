@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ParkingApp_BackEnd.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+using ParkingApp_BackEnd.Models;
 
 namespace ParkingApp_BackEnd.Data
 {
@@ -30,7 +30,6 @@ namespace ParkingApp_BackEnd.Data
                 CardNumber = 1234123412341234,
                 CardDate = 03/22,
                 CCV = 221,
-                CoordinatesWhenParking = "134.145",
                 MinutesParked = 160, 
                 DateTimeWhenParking = DateTime.Now,
                 MinutesSpentFindingParking = 15,
@@ -45,7 +44,6 @@ namespace ParkingApp_BackEnd.Data
                 CardNumber = 1234432143214321,
                 CardDate = 01 / 22,
                 CCV = 111,
-                CoordinatesWhenParking = "133.142",
                 MinutesParked = 10,
                 DateTimeWhenParking = DateTime.Now,
                 MinutesSpentFindingParking = 5,

@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkingApp_BackEnd.Models
+namespace ParkingApp_FrontEnd.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
-        public double Phone { get; set; }
-        public double CardNumber { get; set; }
-        public int CardDate { get; set; }
-        public int CCV { get; set; }
+        public string Phone { get; set; }
+        public string CardNumber { get; set; }
+        public string CardDate { get; set; }
+        public string CCV { get; set; }
         public string LicensePlate { get; set; }
         public string CoordinatesWhenParking { get; set; }
         public DateTime DateTimeWhenParking { get; set; } = DateTime.Now;

@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkingApp_BackEnd.Models
+namespace ParkingApp_FrontEnd.ViewModels
 {
-    public class User
+    public class UserViewModel
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
